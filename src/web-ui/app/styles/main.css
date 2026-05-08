@@ -347,6 +347,38 @@ body {
     filter: drop-shadow(0 2px 3px rgba(23, 32, 51, 0.22));
 }
 
+
+.graph-relation-label {
+    position: absolute;
+    z-index: 3;
+    min-width: 140px;
+    padding: 8px 12px;
+    color: #25324b;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid #cfd8ff;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(37, 50, 75, 0.12);
+    text-align: center;
+}
+
+.graph-relation-label span,
+.graph-relation-label strong {
+    display: block;
+}
+
+.graph-relation-label span {
+    color: #4b69ff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.graph-relation-label strong {
+    font-size: 12px;
+    margin-top: 2px;
+}
+
 .graph-node {
     position: absolute;
     z-index: 2;
@@ -436,6 +468,36 @@ body {
     margin-bottom: 8px;
 }
 
+
+.relationship-note {
+    color: #25324b;
+    background: #ffffff;
+    border: 1px solid #cfd8ff;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(75, 105, 255, 0.12);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    padding: 14px;
+}
+
+.relationship-note .eyebrow {
+    margin-bottom: 8px;
+}
+
+.relationship-note strong,
+.relationship-note small {
+    display: block;
+}
+
+.relationship-note strong {
+    color: #172033;
+    margin-bottom: 6px;
+}
+
+.relationship-note small {
+    color: #5e6a83;
+}
+
 .note {
     color: #5e6a83;
     background: #f7f9ff;
@@ -504,6 +566,14 @@ body {
 
     .graph-line {
         display: none;
+    }
+
+    .graph-relation-label {
+        position: relative;
+        left: auto !important;
+        top: auto !important;
+        border-radius: 14px;
+        margin: 16px;
     }
 
     .graph-node {

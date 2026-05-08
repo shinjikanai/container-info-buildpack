@@ -18,6 +18,19 @@ angular.module('containerInfoWebUiApp')
             { style: { width: '25%', left: '47%', top: '23%', transform: 'rotate(-88deg)' } }
         ];
 
+        var leftGraphLine = [graphLines[2]];
+
+        var q01RelationshipLinks = [
+            {
+                from: 'Q01',
+                to: 'A4',
+                type: '前提確認リンク',
+                title: '今扱う理由と古い前提の見直し',
+                description: '「なぜ今このテーマを扱うのか？」という問いは、古い前提に引っ張られて判断が遅れていないかを確認する観点につながっています。',
+                style: { left: '23%', top: '42%' }
+            }
+        ];
+
         function node(type, position, id, title, description) {
             return {
                 type: type,
@@ -45,14 +58,12 @@ angular.module('containerInfoWebUiApp')
                 title: 'なぜ今このテーマを扱うのか？',
                 summary: '背景、変化、意思決定の必要性を整理する。',
                 graphLead: '問い1では、背景の変化から優先順位を決めるまでの思考回路を表示しています。',
-                nodes: graph(
-                    'Q01', 'なぜ今このテーマを扱うのか？', 'テーマを扱うタイミングを定義する。',
-                    '環境変化', '外部・内部の変化を確認する。',
-                    '未対応の影響', '放置した場合の機会損失を見る。',
-                    '優先順位', '今着手すべき度合いを判断する。',
-                    '前提の揺らぎ', '古い前提に引っ張られていないか確認する。'
-                ),
-                lines: graphLines,
+                nodes: [
+                    node('core', 'center', 'Q01', 'なぜ今このテーマを扱うのか？', 'テーマを扱うタイミングを定義する。'),
+                    node('risk', 'left', 'A4', '古い前提の見直し', '古い前提に引っ張られていないか確認する。')
+                ],
+                lines: leftGraphLine,
+                relationships: q01RelationshipLinks,
                 conclusion: {
                     title: '今扱う理由は、変化が意思決定の遅れを許さない段階に入ったからです。',
                     body: '背景の変化、未対応時の影響、優先順位を並べると、この問いは単なる確認ではなく、次の行動を決める入口になります。',
