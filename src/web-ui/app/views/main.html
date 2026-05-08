@@ -53,6 +53,12 @@
             <div class="graph-line"
                  ng-repeat="line in activeQuestion.lines"
                  ng-style="line.style"></div>
+            <div class="graph-relation-label"
+                 ng-repeat="relationship in activeQuestion.relationships"
+                 ng-style="relationship.style">
+                <span>{{relationship.type}}</span>
+                <strong>{{relationship.from}} → {{relationship.to}}</strong>
+            </div>
             <div class="graph-node {{node.type}}"
                  ng-repeat="node in activeQuestion.nodes"
                  ng-style="node.style">
@@ -71,6 +77,13 @@
             <li>周辺の観点・根拠・判断軸へ枝分かれします。</li>
             <li>結論はツリーに無理に入れず、グラフ下で成果として表示します。</li>
         </ol>
+        <div class="relationship-note" ng-if="activeQuestion.relationships">
+            <p class="eyebrow">Relationship</p>
+            <div ng-repeat="relationship in activeQuestion.relationships">
+                <strong>{{relationship.title}}</strong>
+                <small>{{relationship.description}}</small>
+            </div>
+        </div>
         <p class="note">
             コンクルージョンをグラフ内に入れると、思考ツリーの1ノードとして扱われて見え方が曖昧になるため、
             ここでは「グラフから導き出された結果」として分離しています。
