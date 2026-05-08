@@ -18,23 +18,23 @@ angular.module('containerInfoWebUiApp')
             { style: { width: '25%', left: '47%', top: '23%', transform: 'rotate(-88deg)' } }
         ];
 
-        function node(type, position, badge, title, description) {
+        function node(type, position, id, title, description) {
             return {
                 type: type,
                 style: graphPositions[position],
-                badge: badge,
+                id: id,
                 title: title,
                 description: description
             };
         }
 
-        function graph(centerTitle, centerDescription, topTitle, topDescription, rightTitle, rightDescription, bottomTitle, bottomDescription, leftTitle, leftDescription) {
+        function graph(questionId, questionTitle, centerDescription, topTitle, topDescription, rightTitle, rightDescription, bottomTitle, bottomDescription, leftTitle, leftDescription) {
             return [
-                node('core', 'center', '問い', centerTitle, centerDescription),
-                node('signal', 'top', '観点', topTitle, topDescription),
-                node('evidence', 'right', '根拠', rightTitle, rightDescription),
-                node('choice', 'bottom', '判断', bottomTitle, bottomDescription),
-                node('risk', 'left', '注意', leftTitle, leftDescription)
+                node('core', 'center', questionId, questionTitle, centerDescription),
+                node('signal', 'top', 'VIEWPOINT', topTitle, topDescription),
+                node('evidence', 'right', 'EVIDENCE', rightTitle, rightDescription),
+                node('choice', 'bottom', 'DECISION', bottomTitle, bottomDescription),
+                node('risk', 'left', 'WATCHOUT', leftTitle, leftDescription)
             ];
         }
 
@@ -46,7 +46,7 @@ angular.module('containerInfoWebUiApp')
                 summary: '背景、変化、意思決定の必要性を整理する。',
                 graphLead: '問い1では、背景の変化から優先順位を決めるまでの思考回路を表示しています。',
                 nodes: graph(
-                    'なぜ今なのか', 'テーマを扱うタイミングを定義する。',
+                    'Q01', 'なぜ今このテーマを扱うのか？', 'テーマを扱うタイミングを定義する。',
                     '環境変化', '外部・内部の変化を確認する。',
                     '未対応の影響', '放置した場合の機会損失を見る。',
                     '優先順位', '今着手すべき度合いを判断する。',
@@ -70,7 +70,7 @@ angular.module('containerInfoWebUiApp')
                 summary: '関係者、受け手、期待値をつなげて考える。',
                 graphLead: '問い2では、対象者の期待と判断基準を結びつけて重要度を見える化します。',
                 nodes: graph(
-                    '誰に重要か', '問いの受け手を明確にする。',
+                    'Q02', '誰にとって重要な問いなのか？', '問いの受け手を明確にする。',
                     '主要ユーザー', '最も影響を受ける人を特定する。',
                     '期待値', 'その人が何を求めているかを見る。',
                     '価値の届け方', 'どの体験で価値を伝えるか決める。',
@@ -94,7 +94,7 @@ angular.module('containerInfoWebUiApp')
                 summary: '事実、解釈、判断の順番を明確にする。',
                 graphLead: '問い3では、根拠から解釈、判断へ進む経路をグラフで確認します。',
                 nodes: graph(
-                    '根拠から結論へ', '結論までの道筋を整理する。',
+                    'Q03', 'どの根拠から結論へ進むのか？', '結論までの道筋を整理する。',
                     '観測された事実', 'まず確認できる事実を置く。',
                     '解釈の幅', '複数の読み方を比較する。',
                     '採用する判断', '最も説明力の高い判断を選ぶ。',
@@ -117,7 +117,7 @@ angular.module('containerInfoWebUiApp')
                 title: 'どの選択肢を比較すべきか？',
                 summary: '代替案、評価軸、トレードオフを整理する。',
                 graphLead: '問い4では、選択肢を比較するときの評価軸を可視化します。',
-                nodes: graph('選択肢の比較', '比較対象を揃える。', '代替案', '候補を洗い出す。', '評価軸', '同じものさしで見る。', '推奨案', '最も合う案を選ぶ。', 'トレードオフ', '失うものも確認する。'),
+                nodes: graph('Q04', 'どの選択肢を比較すべきか？', '比較対象を揃える。', '代替案', '候補を洗い出す。', '評価軸', '同じものさしで見る。', '推奨案', '最も合う案を選ぶ。', 'トレードオフ', '失うものも確認する。'),
                 lines: graphLines
             },
             {
@@ -126,7 +126,7 @@ angular.module('containerInfoWebUiApp')
                 title: '次に取るべき行動は何か？',
                 summary: '結論を実行計画へ変換する。',
                 graphLead: '問い5では、結論を行動へ落とし込む流れを表示します。',
-                nodes: graph('次の行動', '実行の一歩目を決める。', '必要作業', 'やることを分解する。', '担当と期限', '動かす条件を決める。', '最初の一手', 'すぐ始める行動を選ぶ。', '実行リスク', '止まりそうな点を先に見る。'),
+                nodes: graph('Q05', '次に取るべき行動は何か？', '実行の一歩目を決める。', '必要作業', 'やることを分解する。', '担当と期限', '動かす条件を決める。', '最初の一手', 'すぐ始める行動を選ぶ。', '実行リスク', '止まりそうな点を先に見る。'),
                 lines: graphLines
             },
             {
@@ -135,7 +135,7 @@ angular.module('containerInfoWebUiApp')
                 title: 'どう検証して改善するのか？',
                 summary: '指標、振り返り、学習サイクルを設計する。',
                 graphLead: '問い6では、実行後に学びを回収する検証サイクルを示します。',
-                nodes: graph('検証と改善', '学びを次につなげる。', '成功指標', '何を測るか決める。', '観測データ', '結果を集める。', '改善判断', '続けるか変えるか決める。', '測定の偏り', '数字だけで誤読しない。'),
+                nodes: graph('Q06', 'どう検証して改善するのか？', '学びを次につなげる。', '成功指標', '何を測るか決める。', '観測データ', '結果を集める。', '改善判断', '続けるか変えるか決める。', '測定の偏り', '数字だけで誤読しない。'),
                 lines: graphLines
             }
         ];
