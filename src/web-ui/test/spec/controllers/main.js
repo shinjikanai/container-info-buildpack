@@ -2,21 +2,35 @@
 
 describe('Controller: MainCtrl', function () {
 
-  // load the controller's module
   beforeEach(module('containerInfoWebUiApp'));
 
-  var MainCtrl,
-    scope;
+  var scope;
 
-  // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    $controller('MainCtrl', {
       $scope: scope
     });
   }));
 
-  xit('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should expose six questions and default to question one', function () {
+    expect(scope.questions.length).toBe(6);
+    expect(scope.activeQuestion.label).toBe('問い1');
+    expect(scope.activeQuestion.conclusion.title).toContain('今扱う理由');
+  });
+
+  it('should update the active question when a question is selected', function () {
+    scope.selectQuestion(scope.questions[1]);
+
+    expect(scope.activeQuestion.label).toBe('問い2');
+    expect(scope.activeQuestion.conclusion.title).toContain('重要性');
+  });
+
+  it('should keep later questions available even when conclusions are not set yet', function () {
+    scope.selectQuestion(scope.questions[3]);
+
+    expect(scope.activeQuestion.label).toBe('問い4');
+    expect(scope.activeQuestion.conclusion).toBeUndefined();
+    expect(scope.activeQuestion.nodes.length).toBe(5);
   });
 });

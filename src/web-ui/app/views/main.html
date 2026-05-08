@@ -1,30 +1,100 @@
-<div class="row">
-    <h4>Run remote command</h4>
-
-    <form class="form-inline" role="form">
-        <div class="form-group">
-            <input type="text" style="width: 400px;" class="form-control" ng-model="cmd" placeholder="eg: ls app"/>
-            <br/>
-            <button type="submit" class="btn btn-primary" ng-click="execute_command(cmd)">Execute</button>
-        </div>
-        <div>eg:
-            <a ng-click="execute_command('pstree -a')">pstree -a</a>
-            <a ng-click="execute_command('free -m')">free -m</a>
-            <a ng-click="execute_command('GEM_HOME=/app/vendor/gems /app/vendor/gems/bin/ohai')">ohai</a>
-        </div>
-    </form>
-    <div class="top-buffer">
-        <pre>{{cmd_results}}</pre>
+<section class="hero-panel">
+    <div class="eyebrow">Question driven insight map</div>
+    <h1>問いから思考回路をたどり、結論までつなげる</h1>
+    <p>
+        6つの問いを起点に、選んだ問いのグラフ、判断材料、そこから導かれるコンクルージョンを
+        ひと続きの流れとして確認できます。
+    </p>
+    <div class="flow-summary" aria-label="サイトの流れ">
+        <span>問いを選ぶ</span>
+        <i class="fa fa-long-arrow-right"></i>
+        <span>思考グラフを見る</span>
+        <i class="fa fa-long-arrow-right"></i>
+        <span>結論を確認する</span>
     </div>
-</div>
+</section>
 
-<hr>
+<section class="question-section">
+    <div class="section-heading">
+        <p class="eyebrow">Step 1</p>
+        <h2>6つの問い</h2>
+        <p>問いをクリックすると、下のグラフとコンクルージョンがその問いに合わせて更新されます。</p>
+    </div>
 
-<div class="row">
-    <h4>Browse container filesystem</h4>
-    <iframe src="/root/" width="100%" height="300px"></iframe>
-</div>
+    <div class="question-grid">
+        <button type="button"
+                class="question-card"
+                ng-repeat="question in questions"
+                ng-class="{active: question.id === activeQuestion.id, pending: !question.conclusion}"
+                ng-click="selectQuestion(question)">
+            <span class="question-number">{{question.label}}</span>
+            <strong>{{question.title}}</strong>
+            <small>{{question.summary}}</small>
+            <span class="status-pill" ng-if="question.conclusion">結論あり</span>
+            <span class="status-pill muted" ng-if="!question.conclusion">設計中</span>
+        </button>
+    </div>
+</section>
+
+<section class="insight-layout">
+    <div class="graph-card">
+        <div class="section-heading compact">
+            <p class="eyebrow">Step 2</p>
+            <h2>{{activeQuestion.label}}の思考グラフ</h2>
+            <p>{{activeQuestion.graphLead}}</p>
+        </div>
+
+        <div class="thought-graph" aria-label="選択した問いの思考グラフ">
+            <div class="graph-line"
+                 ng-repeat="line in activeQuestion.lines"
+                 ng-style="line.style"></div>
+            <div class="graph-node {{node.type}}"
+                 ng-repeat="node in activeQuestion.nodes"
+                 ng-style="node.style">
+                <span>{{node.badge}}</span>
+                <strong>{{node.title}}</strong>
+                <small>{{node.description}}</small>
+            </div>
+        </div>
+    </div>
+
+    <aside class="reasoning-card">
+        <p class="eyebrow">Graph guide</p>
+        <h3>読み方</h3>
+        <ol>
+            <li>中央の問いから出発します。</li>
+            <li>周辺の観点・根拠・判断軸へ枝分かれします。</li>
+            <li>結論はツリーに無理に入れず、グラフ下で成果として表示します。</li>
+        </ol>
+        <p class="note">
+            コンクルージョンをグラフ内に入れると、思考ツリーの1ノードとして扱われて見え方が曖昧になるため、
+            ここでは「グラフから導き出された結果」として分離しています。
+        </p>
+    </aside>
+</section>
+
+<section class="conclusion-section">
+    <div class="section-heading compact">
+        <p class="eyebrow">Step 3</p>
+        <h2>{{activeQuestion.label}}から導き出されたコンクルージョン</h2>
+    </div>
+
+    <div class="conclusion-card" ng-if="activeQuestion.conclusion">
+        <span class="conclusion-tag">{{activeQuestion.label}}の結論</span>
+        <h3>{{activeQuestion.conclusion.title}}</h3>
+        <p>{{activeQuestion.conclusion.body}}</p>
+        <ul>
+            <li ng-repeat="point in activeQuestion.conclusion.points">{{point}}</li>
+        </ul>
+    </div>
+
+    <div class="conclusion-card empty" ng-if="!activeQuestion.conclusion">
+        <span class="conclusion-tag muted">結論は未設定</span>
+        <h3>{{activeQuestion.label}}のコンクルージョンは準備中です</h3>
+        <p>問いとグラフの設計は表示しています。結論が固まり次第、この位置に追加できます。</p>
+    </div>
+</section>
 
 <div class="footer">
-    <p>CF Container Info Web UI</p>
+    <p>問い → 思考グラフ → コンクルージョン</p>
 </div>
