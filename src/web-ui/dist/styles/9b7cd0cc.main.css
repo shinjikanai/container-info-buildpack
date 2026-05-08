@@ -130,6 +130,83 @@ body {
     margin-bottom: 24px;
 }
 
+.journey-step {
+    position: relative;
+    padding-left: 82px;
+}
+
+.journey-step::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 48px;
+    bottom: -40px;
+    width: 4px;
+    background: linear-gradient(180deg, #4b69ff 0%, #2bc7a7 50%, #172033 100%);
+    border-radius: 999px;
+    box-shadow: 0 0 0 6px rgba(75, 105, 255, 0.08);
+}
+
+.journey-step::after {
+    position: absolute;
+    left: 18px;
+    bottom: -24px;
+    width: 28px;
+    height: 28px;
+    color: #ffffff;
+    background: #172033;
+    border: 4px solid #f5f7fb;
+    border-radius: 50%;
+    box-shadow: 0 8px 18px rgba(37, 50, 75, 0.2);
+    content: '\f063';
+    font-family: FontAwesome;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.journey-step.step-three::before,
+.journey-step.step-three::after {
+    display: none;
+}
+
+.step-marker {
+    position: absolute;
+    left: 0;
+    top: 24px;
+    z-index: 3;
+    width: 64px;
+    padding: 10px 8px;
+    color: #172033;
+    background: #ffffff;
+    border: 2px solid #4b69ff;
+    border-radius: 18px;
+    box-shadow: 0 14px 28px rgba(37, 50, 75, 0.14);
+    text-align: center;
+}
+
+.step-marker span,
+.step-marker strong {
+    display: block;
+}
+
+.step-marker span {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto 6px;
+    color: #ffffff;
+    background: #4b69ff;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 30px;
+}
+
+.step-marker strong {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+}
+
 .section-heading h2,
 .section-heading h3 {
     color: #172033;
@@ -248,11 +325,26 @@ body {
 
 .graph-line {
     position: absolute;
-    height: 3px;
-    background: linear-gradient(90deg, rgba(75, 105, 255, 0.1), rgba(75, 105, 255, 0.72));
+    height: 5px;
+    background: linear-gradient(90deg, rgba(23, 32, 51, 0.88), rgba(75, 105, 255, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.82);
     border-radius: 999px;
+    box-shadow: 0 0 0 2px rgba(23, 32, 51, 0.1), 0 7px 18px rgba(23, 32, 51, 0.2);
     transform-origin: left center;
     z-index: 1;
+}
+
+.graph-line::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    width: 0;
+    height: 0;
+    border-bottom: 7px solid transparent;
+    border-left: 10px solid #4b69ff;
+    border-top: 7px solid transparent;
+    filter: drop-shadow(0 2px 3px rgba(23, 32, 51, 0.22));
 }
 
 .graph-node {
@@ -269,11 +361,14 @@ body {
 
 .graph-node span {
     display: inline-block;
-    color: #4b69ff;
-    font-size: 11px;
+    color: #ffffff;
+    background: #25324b;
+    border-radius: 999px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.08em;
     margin-bottom: 8px;
+    padding: 4px 8px;
 }
 
 .graph-node strong,
@@ -303,6 +398,10 @@ body {
 .graph-node.core strong,
 .graph-node.core small {
     color: #ffffff;
+}
+
+.graph-node.core span {
+    background: rgba(255, 255, 255, 0.22);
 }
 
 .graph-node.signal {
@@ -387,6 +486,16 @@ body {
     .question-grid,
     .insight-layout {
         grid-template-columns: 1fr;
+    }
+
+    .journey-step {
+        padding-left: 0;
+    }
+
+    .journey-step::before,
+    .journey-step::after,
+    .step-marker {
+        display: none;
     }
 
     .thought-graph {

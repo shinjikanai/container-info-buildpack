@@ -14,7 +14,9 @@
     </div>
 </section>
 
-<section class="question-section">
+<div class="journey-step step-one">
+    <div class="step-marker"><span>1</span><strong>問い</strong></div>
+    <section class="question-section">
     <div class="section-heading">
         <p class="eyebrow">Step 1</p>
         <h2>6つの問い</h2>
@@ -34,9 +36,12 @@
             <span class="status-pill muted" ng-if="!question.conclusion">設計中</span>
         </button>
     </div>
-</section>
+    </section>
+</div>
 
-<section class="insight-layout">
+<div class="journey-step step-two">
+    <div class="step-marker"><span>2</span><strong>思考</strong></div>
+    <section class="insight-layout">
     <div class="graph-card">
         <div class="section-heading compact">
             <p class="eyebrow">Step 2</p>
@@ -51,7 +56,7 @@
             <div class="graph-node {{node.type}}"
                  ng-repeat="node in activeQuestion.nodes"
                  ng-style="node.style">
-                <span>{{node.badge}}</span>
+                <span>{{node.id}}</span>
                 <strong>{{node.title}}</strong>
                 <small>{{node.description}}</small>
             </div>
@@ -71,9 +76,12 @@
             ここでは「グラフから導き出された結果」として分離しています。
         </p>
     </aside>
-</section>
+    </section>
+</div>
 
-<section class="conclusion-section">
+<div class="journey-step step-three">
+    <div class="step-marker"><span>3</span><strong>結論</strong></div>
+    <section class="conclusion-section">
     <div class="section-heading compact">
         <p class="eyebrow">Step 3</p>
         <h2>{{activeQuestion.label}}から導き出されたコンクルージョン</h2>
@@ -93,7 +101,8 @@
         <h3>{{activeQuestion.label}}のコンクルージョンは準備中です</h3>
         <p>問いとグラフの設計は表示しています。結論が固まり次第、この位置に追加できます。</p>
     </div>
-</section>
+    </section>
+</div>
 
 <div class="footer">
     <p>問い → 思考グラフ → コンクルージョン</p>
